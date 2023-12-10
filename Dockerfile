@@ -17,7 +17,7 @@ RUN addgroup -g 1000 badge && adduser -G badge -g badge -s /bin/sh -D badge
 
 RUN mkdir -p /var/www/html
 
-ADD ./badge/ /var/www/html
+# ADD ./badge/ /var/www/html
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd pdo_pgsql
 
