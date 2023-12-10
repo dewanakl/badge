@@ -11,16 +11,22 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
-
-RUN addgroup -g 1000 badge && adduser -G badge -g badge -s /bin/sh -D badge
-
-RUN mkdir -p /var/www/html
-
-# ADD ./badge/ /var/www/html
-
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN chown -R badge:badge /var/www/html
+ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Set working directory
+WORKDIR /var/www
+
+USER $user
