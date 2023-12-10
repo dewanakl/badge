@@ -1,21 +1,20 @@
-FROM php:8.0-fpm-alpine AS dev
+FROM richarvey/nginx-php-fpm:1.9.1
 
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd pdo_pgsql
+COPY . .
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Image config
+ENV SKIP_COMPOSER 1
+ENV WEBROOT /var/www/html/public
+ENV PHP_ERRORS_STDERR 1
+ENV RUN_SCRIPTS 1
+ENV REAL_IP_HEADER 1
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+# Laravel config
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Set working directory
-WORKDIR /var/www
-
-USER $user
-
-FROM dev
+CMD ["/start.sh"]
