@@ -55,25 +55,3 @@ services:
         working_dir: /var/www/html
         networks:
             - badge
-
-    artisan:
-        build:
-            context: .
-            dockerfile: php.dockerfile
-        container_name: artisan
-        volumes:
-            - ./src:/var/www/html
-        working_dir: /var/www/html
-        entrypoint: ['php', 'artisan']
-        networks:
-            - badge
-
-    npm:
-        image: node:current-alpine
-        container_name: npm
-        volumes:
-            - ./src:/var/www/html
-        working_dir: /var/www/html
-        entrypoint: ['npm']
-        networks:
-            - badge
