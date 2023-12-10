@@ -2,7 +2,7 @@
 /cache/log/*.key
 /cache/queue/*.key
 /cache/routes/*.key
-/cache/views/*.key
+# /cache/views/*.key
 /node_modules
 /shared/*.key
 /vendor
