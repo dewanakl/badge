@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.0-fpm-alpine AS dev
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -15,8 +15,6 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-ADD ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
-
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
@@ -30,3 +28,5 @@ RUN mkdir -p /home/$user/.composer && \
 WORKDIR /var/www
 
 USER $user
+
+FROM dev
