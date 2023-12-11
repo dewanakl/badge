@@ -1,5 +1,5 @@
 # Use the official PHP image with FPM
-FROM php:8.1-fpm
+FROM php:8.1-fpm-alpine
 
 # Set the working directory
 WORKDIR /var/www/html
@@ -8,7 +8,9 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Install dependencies
-RUN docker-php-ext-install zip gd pdo pdo_pgsql && \
+RUN apt-get update && \
+    apt-get install -y libzip-dev zip && \
+    docker-php-ext-install zip gd pdo pdo_pgsql && \
     composer install --optimize-autoloader --no-dev && \
     chown -R www-data:www-data cache && \
     cp .env.example .env && \
