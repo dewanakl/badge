@@ -1,12 +1,6 @@
 # Used for prod build.
 FROM php:8.2-fpm-alpine
 
-# Set environment variables
-ENV PHP_OPCACHE_ENABLE=1
-ENV PHP_OPCACHE_ENABLE_CLI=0
-ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
-ENV PHP_OPCACHE_REVALIDATE_FREQ=0
-
 # Install dependencies.
 # RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev
 
@@ -22,8 +16,6 @@ ENV PHP_OPCACHE_REVALIDATE_FREQ=0
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
 
 # Copy configuration files.
-COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
-COPY ./docker/php/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Set working directory to /var/www.
