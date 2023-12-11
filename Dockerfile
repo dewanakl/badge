@@ -1,5 +1,5 @@
 # Used for prod build.
-FROM php:8.1-fpm as php
+FROM php:8.1-fpm
 
 # Set environment variables
 ENV PHP_OPCACHE_ENABLE=1
@@ -14,9 +14,9 @@ RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev ngi
 # RUN docker-php-ext-install pdo pdo_pgsql bcmath curl opcache mbstring gd
 # RUN docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
 
-RUN apt-get update \
-    && docker-php-ext-install pgsqli pdo pdo_pgsql \
-    && docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
+# RUN apt-get update \
+#     && docker-php-ext-install pgsqli pdo pdo_pgsql \
+#     && docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
 
 # Copy composer executable.
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
