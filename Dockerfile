@@ -17,7 +17,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY . /var/www/html
 
 # Atur izin untuk direktori penyimpanan Laravel
-RUN chown -R www-data:www-data /var/www/html/storage
+RUN chown -R www-data:www-data /var/www/html/cache
 
 # Instal dependensi proyek Laravel menggunakan Composer
 RUN composer install --optimize-autoloader --no-dev
