@@ -1,5 +1,5 @@
 # Used for prod build.
-FROM php:fpm-alpine as php
+FROM php:8.1-fpm as php
 
 # Set environment variables
 ENV PHP_OPCACHE_ENABLE=1
@@ -8,10 +8,11 @@ ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
 ENV PHP_OPCACHE_REVALIDATE_FREQ=0
 
 # Install dependencies.
-# RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev
+RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev
 
 # Install PHP extensions.
-RUN docker-php-ext-install pdo pdo_pgsql curl opcache mbstring gd
+# RUN docker-php-ext-install pdo pdo_pgsql bcmath curl opcache mbstring gd
+RUN docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
 
 # Copy composer executable.
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
