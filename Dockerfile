@@ -1,3 +1,5 @@
+FROM nginx:alpine
+
 # Used for prod build.
 FROM php:8.2-fpm-alpine
 
@@ -16,7 +18,7 @@ FROM php:8.2-fpm-alpine
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
 
 # Copy configuration files.
-COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+# COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Set working directory to /var/www.
 WORKDIR /var/www
