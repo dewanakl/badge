@@ -31,8 +31,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ENV COMPOSER_ALLOW_SUPERUSER=1
 # RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
 
-RUN apt-get update && apt-get install -y zip
-RUN docker-php-ext-install pdo pdo_mysql gd pdo_pgsql
+RUN apt-get update && apt-get install -y zip && apt-get install -y php8.1-gd && apt-get install -y php8.1-pgsql
+# RUN docker-php-ext-install pdo pdo_mysql gd pdo_pgsql
 
 COPY . /var/www/html/
 
