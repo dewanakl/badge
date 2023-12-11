@@ -32,7 +32,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 # RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
 
 RUN apt-get update && apt-get install -y zip && apt-get install -y libzip-dev
-RUN apt-get install -y libpng-dev libwebp-dev libsodium
+RUN apt-get install -y libpng-dev libwebp-dev
 # RUN docker-php-ext-install pdo pdo_mysql gd pdo_pgsql
 
 COPY . /var/www/html/
@@ -50,7 +50,7 @@ COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.con
 COPY .env.example .env
 
 RUN chown -R www-data:www-data cache
-RUN docker-php-ext-install pdo zip pdo_mysql gd sodium
+RUN docker-php-ext-install pdo zip pdo_mysql gd libsodium
 
 # CMD ["/var/www/html/enable.sh"]
 RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
