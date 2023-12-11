@@ -11,5 +11,7 @@ else
     echo "env file exists."
 fi
 
+php saya key
+
 php-fpm -D
 nginx -g "daemon off;"

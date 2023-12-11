@@ -39,8 +39,8 @@ RUN chown -R www-data /var/www/cache/views
 RUN chmod -R 755 /var/www/cache/views
 
 # Adjust user permission & group
-RUN usermod --uid 1000 www-data
-RUN groupmod --gid 1001 www-data
+# RUN usermod --uid 1000 www-data
+# RUN groupmod --gid 1001 www-data
 
 # Run the entrypoint file.
 ENTRYPOINT [ "docker/entrypoint.sh" ]
