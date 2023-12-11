@@ -50,7 +50,7 @@ COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.con
 COPY .env.example .env
 
 RUN chown -R www-data:www-data cache
-RUN docker-php-ext-install pdo zip pdo_mysql gd libsodium
+RUN docker-php-ext-install pdo zip pdo_mysql gd
 
 # CMD ["/var/www/html/enable.sh"]
 RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
