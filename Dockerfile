@@ -1,40 +1,23 @@
-FROM nginx:alpine
+# Use the official PHP image
+FROM php:8.1-apache
 
-# Used for prod build.
-FROM php:8.2-fpm-alpine
+# Set the working directory
+WORKDIR /var/www/html
 
-# Install dependencies.
-# RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev
+# Copy the application files
+COPY . /var/www/html
 
-# Install PHP extensions.
-# RUN docker-php-ext-install pdo pdo_pgsql bcmath curl opcache mbstring gd
-# RUN docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y libzip-dev zip && \
+    docker-php-ext-install zip gd pdo pdo_pgsql && \
+    composer install --optimize-autoloader --no-dev && \
+    chown -R www-data:www-data cache && \
+    cp .env.example .env && \
+    php saya key
 
-# RUN apt-get update \
-#     && docker-php-ext-install pgsqli pdo pdo_pgsql \
-#     && docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
+# Expose the port
+EXPOSE 80
 
-# Copy composer executable.
-COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
-
-# Copy configuration files.
-# COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
-
-# Set working directory to /var/www.
-WORKDIR /var/www
-
-# Copy files from current folder to container current folder (set in workdir).
-COPY --chown=www-data:www-data . .
-
-# Fix files ownership.
-RUN chown -R www-data /var/www/cache/views
-
-# Set correct permission.
-RUN chmod -R 755 /var/www/cache/views
-
-# Adjust user permission & group
-# RUN usermod --uid 1000 www-data
-# RUN groupmod --gid 1001 www-data
-
-# Run the entrypoint file.
-ENTRYPOINT [ "docker/entrypoint.sh" ]
+# Start Apache
+CMD ["apache2-foreground"]
