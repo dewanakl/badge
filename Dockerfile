@@ -8,7 +8,7 @@ FROM php:8.1-alpine
 #     nginx
 
 # Aktifkan ekstensi PHP yang diperlukan
-RUN docker-php-ext-install pdo_mysql zip
+# RUN docker-php-ext-install pdo_mysql zip
 
 # Instal Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
