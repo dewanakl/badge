@@ -50,5 +50,5 @@ COPY .env.example .env
 
 RUN chown -R www-data:www-data cache
 
-CMD ["enable"]
+CMD ["enable.sh"]
 
