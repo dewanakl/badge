@@ -50,5 +50,7 @@ COPY .env.example .env
 
 RUN chown -R www-data:www-data cache
 
-CMD ["/var/www/html/enable.sh"]
+# CMD ["/var/www/html/enable.sh"]
+RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
+RUN php saya key && a2enmod rewrite
 
