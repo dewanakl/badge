@@ -12,7 +12,11 @@ RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev ngi
 
 # Install PHP extensions.
 # RUN docker-php-ext-install pdo pdo_pgsql bcmath curl opcache mbstring gd
-RUN docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
+# RUN docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
+
+RUN apt-get update \
+    && docker-php-ext-install pgsqli pdo pdo_pgsql \
+    && docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
 
 # Copy composer executable.
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
