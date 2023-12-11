@@ -1,21 +1,26 @@
-# Use the official PHP image with FPM
-FROM php:8.1-fpm-alpine
+# Gunakan versi PHP 8.1 dan Nginx
+FROM php:8.1-fpm
 
-# Set the working directory
-WORKDIR /var/www/html
+# Instal dependensi
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    unzip \
+    nginx
 
-# Copy the application files
+# Aktifkan ekstensi PHP yang diperlukan
+RUN docker-php-ext-install pdo_mysql zip
+
+# Instal Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Salin proyek Laravel ke dalam kontainer
 COPY . /var/www/html
 
-# Install dependencies
-RUN composer install --optimize-autoloader --no-dev && \
-    chown -R www-data:www-data cache && \
-    cp .env.example .env && \
-    php saya key
+# Atur izin untuk direktori penyimpanan Laravel
+RUN chown -R www-data:www-data /var/www/html/storage
 
-# Expose the port
-# EXPOSE 80
+# Instal dependensi proyek Laravel menggunakan Composer
+RUN composer install --optimize-autoloader --no-dev
 
-# Start PHP-FPM
-CMD ["php-fpm"]
-
+# Salin konfigurasi Nginx
+COPY nginx.conf /etc/nginx/sites-available/default

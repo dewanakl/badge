@@ -6,3 +6,5 @@ services:
   - name: nginx
     buildCommand: docker build -t my-nginx -f Dockerfile.nginx .
     startCommand: docker run -p 8080:80 my-nginx
+
+# docker-compose up --build -d
