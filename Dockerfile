@@ -1,5 +1,5 @@
-# Use the official PHP image
-FROM php:8.1-alpine
+# Use the official PHP image with FPM
+FROM php:8.1-fpm
 
 # Set the working directory
 WORKDIR /var/www/html
@@ -17,7 +17,8 @@ RUN apt-get update && \
     php saya key
 
 # Expose the port
-EXPOSE 80
+# EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start PHP-FPM
+CMD ["php-fpm"]
+
