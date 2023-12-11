@@ -20,7 +20,7 @@ COPY . /var/www/html
 RUN chown -R www-data:www-data /var/www/html/cache
 
 # Instal dependensi proyek Laravel menggunakan Composer
-RUN composer install --optimize-autoloader --no-dev
+# RUN composer install --optimize-autoloader --no-dev
 
 # Salin konfigurasi Nginx
 COPY nginx.conf /etc/nginx/sites-available/default
