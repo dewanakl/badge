@@ -2,10 +2,10 @@
 FROM php:8.1-alpine
 
 # Instal dependensi
-RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    unzip \
-    nginx
+# RUN apt-get update && apt-get install -y \
+#     libzip-dev \
+#     unzip \
+#     nginx
 
 # Aktifkan ekstensi PHP yang diperlukan
 RUN docker-php-ext-install pdo_mysql zip
