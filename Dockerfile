@@ -1,5 +1,5 @@
 # Used for prod build.
-FROM php:8.1-fpm as php
+FROM php:fpm-alpine as php
 
 # Set environment variables
 ENV PHP_OPCACHE_ENABLE=1
