@@ -8,9 +8,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Install dependencies
-RUN apt-get update && \
-    apt-get install -y libzip-dev zip && \
-    docker-php-ext-install zip gd pdo pdo_pgsql && \
+RUN docker-php-ext-install zip gd pdo pdo_pgsql && \
     composer install --optimize-autoloader --no-dev && \
     chown -R www-data:www-data cache && \
     cp .env.example .env && \
