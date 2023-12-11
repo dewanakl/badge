@@ -14,9 +14,9 @@ ENV PHP_OPCACHE_REVALIDATE_FREQ=0
 # RUN docker-php-ext-install pdo pdo_pgsql bcmath curl opcache mbstring gd
 # RUN docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
 
-RUN apt-get update \
-    && docker-php-ext-install pgsqli pdo pdo_pgsql \
-    && docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
+# RUN apt-get update \
+#     && docker-php-ext-install pgsqli pdo pdo_pgsql \
+#     && docker-php-ext-enable pdo_pgsql bcmath curl opcache mbstring gd
 
 # Copy composer executable.
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
