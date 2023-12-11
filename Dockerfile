@@ -26,7 +26,7 @@
 # COPY nginx.conf /etc/nginx/sites-available/default
 
 
-FROM php:8.1-apache
+FROM php:8.2-apache
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 # RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
