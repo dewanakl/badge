@@ -32,7 +32,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 # RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
 
 RUN apt-get update && apt-get install -y zip && apt-get install -y libzip-dev
-RUN apt-get install -y freetype-dev icu-dev imagemagick-dev libjpeg-turbo-dev libpng-dev libwebp-dev
+RUN apt-get install -y libpng-dev libwebp-dev
 # RUN docker-php-ext-install pdo pdo_mysql gd pdo_pgsql
 
 COPY . /var/www/html/
