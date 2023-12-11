@@ -1,5 +1,5 @@
 # Gunakan versi PHP 8.1 dan Nginx
-FROM php:8.1-fpm
+FROM php:8.1-alpine
 
 # Instal dependensi
 RUN apt-get update && apt-get install -y \
