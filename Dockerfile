@@ -32,6 +32,12 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN apt-get update && apt-get install -y zip
 
+RUN apt-get clean && \
+    apt-get autoclean && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/cache/* && \
+    rm -rf /var/lib/log/* && \
+
 
 COPY . /var/www/html/
 COPY --from=build /usr/bin/composer /usr/bin/composer
