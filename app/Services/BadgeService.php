@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use EasySVG;
 use PUGX\Poser\Badge;
 use PUGX\Poser\Poser;
 use PUGX\Poser\Render\SvgFlatRender;
@@ -31,9 +30,12 @@ class BadgeService implements BadgeContract
         }
 
         if ($style === 'none') {
-            $svg = new EasySVG();
-            $svg->clearSVG();
-            return $svg->asXML();
+            return <<<EOD
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" version="1.1">
+            <rect width="0%" height="0%" fill="none" />
+            </svg>
+            EOD;
         }
 
         return $this->poser->generate(
