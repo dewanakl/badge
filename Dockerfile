@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y zip unzip libonig-dev libicu-dev
 RUN apt-get install -y libzip-dev libpng-dev libwebp-dev
 
-RUN docker-php-ext-install pdo zip pdo_mysql gd
+RUN docker-php-ext-install pdo zip pdo_mysql gd mbstring intl opcache
 RUN docker-php-ext-enable pdo zip pdo_mysql gd mbstring intl opcache
 
 RUN a2enmod rewrite
