@@ -24,3 +24,5 @@ COPY default.conf /etc/apache2/sites-available/000-default.conf
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
 RUN chown -R www-data:www-data cache
+
+RUN php saya cache && php saya view:cache

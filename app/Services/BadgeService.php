@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use EasySVG;
 use PUGX\Poser\Badge;
 use PUGX\Poser\Poser;
 use PUGX\Poser\Render\SvgFlatRender;
@@ -25,8 +26,14 @@ class BadgeService implements BadgeContract
 
     public function renderBadge(string $label, string $message, string|null $color = null, string|null $style = null): string
     {
-        if (!in_array($style, ['flat', 'flat-square', 'plastic', 'for-the-badge'], true)) {
+        if (!in_array($style, ['flat', 'flat-square', 'plastic', 'for-the-badge', 'none'], true)) {
             $style = 'flat';
+        }
+
+        if ($style === 'none') {
+            $svg = new EasySVG();
+            $svg->clearSVG();
+            return $svg->asXML();
         }
 
         return $this->poser->generate(

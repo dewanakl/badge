@@ -30,6 +30,7 @@ Dibantu dengan saya console untuk mempermudah dalam development aplikasi Anda.
 
 ## Badge Styles
 
+- **none**: Empty style - A hidden image.
 - **flat**: Flat Style - A simple and flat badge style.
 - **flat-square**: Flat Square Style - Similar to flat, but with a square shape.
 - **plastic**: Plastic Style - A plastic-like badge style with a slight shadow.
