@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\BadgeContract;
+use App\Services\BadgeService;
 use Core\Facades\Provider;
 
 class AppServiceProvider extends Provider
@@ -13,7 +15,7 @@ class AppServiceProvider extends Provider
      */
     public function registrasi()
     {
-        //
+        $this->app->bind(BadgeContract::class, BadgeService::class);
     }
 
     /**

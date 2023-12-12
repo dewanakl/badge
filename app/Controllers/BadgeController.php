@@ -5,14 +5,14 @@ namespace App\Controllers;
 use App\Middleware\UsernameMiddleware;
 use App\Models\Badge;
 use App\Response\BadgeResponse;
-use App\Services\BadgeService;
+use App\Services\BadgeContract;
 use Core\Routing\Controller;
 use Core\Http\Request;
 
 class BadgeController extends Controller
 {
     #[UsernameMiddleware]
-    public function __invoke(string $username, Request $request, BadgeService $badgeService): BadgeResponse
+    public function __invoke(string $username, Request $request, BadgeContract $badgeService): BadgeResponse
     {
         $valid = $this->validate($request, [
             'label' => ['nullable', 'str', 'trim', 'max:25'],

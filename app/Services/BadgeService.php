@@ -9,7 +9,7 @@ use PUGX\Poser\Render\SvgFlatSquareRender;
 use PUGX\Poser\Render\SvgForTheBadgeRenderer;
 use PUGX\Poser\Render\SvgPlasticRender;
 
-class BadgeService
+class BadgeService implements BadgeContract
 {
     private $poser;
 
