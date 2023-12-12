@@ -2,10 +2,12 @@ FROM php:8.2-apache
 
 RUN apt-get update
 RUN apt-get install -y zip unzip libonig-dev libicu-dev
-RUN apt-get install -y libzip-dev libpng-dev libwebp-dev
+RUN apt-get install -y libzip-dev libpng-dev libwebp-dev libpq-dev
 
-RUN docker-php-ext-install pdo zip pdo_pgsql gd mbstring intl opcache
-RUN docker-php-ext-enable pdo zip pdo_pgsql gd mbstring intl opcache
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+
+RUN docker-php-ext-install pdo zip pdo_pgsql pgsql gd mbstring intl opcache
+RUN docker-php-ext-enable pdo zip pdo_pgsql pgsql gd mbstring intl opcache
 
 RUN a2enmod rewrite
 
