@@ -13,11 +13,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY . /var/www/html/
 WORKDIR /var/www/html/
 
-# COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+# COPY default.conf /etc/apache2/sites-available/000-default.conf
 COPY nginx.conf /etc/nginx/sites-available/default
 
 RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
 RUN chown -R www-data:www-data cache
 
-COPY .env.example .env
-RUN php saya key
+# RUN a2enmod rewrite
+EXPOSE 443
+CMD ["php-fpm"]
