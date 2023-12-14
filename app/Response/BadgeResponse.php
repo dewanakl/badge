@@ -3,6 +3,7 @@
 namespace App\Response;
 
 use Core\Http\Respond;
+use DateTimeInterface;
 
 class BadgeResponse extends Respond
 {
@@ -11,7 +12,10 @@ class BadgeResponse extends Respond
         parent::__construct($content, headers: [
             ...respond()->getHeader()->all(),
             'Content-Type' => 'image/svg+xml',
-            'Cache-Control' => 'max-age=0, no-cache, no-store, must-revalidate'
+            'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate, proxy-revalidate',
+            'Age' => '0',
+            'Expires' => gmdate(DateTimeInterface::RFC7231, 0),
+            'Last-Modified' => gmdate(DateTimeInterface::RFC7231, 0)
         ]);
     }
 }
